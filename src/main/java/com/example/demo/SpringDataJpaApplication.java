@@ -25,18 +25,14 @@ public class SpringDataJpaApplication {
 	@Bean
 	public CommandLineRunner run(CustomerRepository repository) {
 		return args -> {
-			insertCustomer(repository);
+			
 			getCustomer(repository);
 			updateCustomer(repository);
 			deleteCustomer(repository);
 		};
 	}
 
-	private void insertCustomer(CustomerRepository repository) {
-		CustomerEntity entity = new CustomerEntity("Dat", 30, "Male");
-		repository.createCustomer(entity.getName(), entity.getAge(), entity.getGender());;
 
-	}
 
 	private void getCustomer(CustomerRepository repository) {
 		CustomerEntity entity = repository.findOneCustomer(1);
