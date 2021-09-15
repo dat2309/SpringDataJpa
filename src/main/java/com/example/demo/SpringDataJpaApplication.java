@@ -33,38 +33,21 @@ public class SpringDataJpaApplication {
 	}
 
 	private void insertCustomer(CustomerRepository repository) {
-		CustomerEntity entity = new CustomerEntity("dat", 30, "Male");
-		repository.save(entity);
+		CustomerEntity entity = new CustomerEntity("Dat", 30, "Male");
+		repository.createCustomer(entity.getName(), entity.getAge(), entity.getGender());;
 
 	}
 
 	private void getCustomer(CustomerRepository repository) {
-		Optional<CustomerEntity> result = repository.findById((long) 1);
-		if (result.isPresent()) {
-			CustomerEntity entity = result.get();
-			System.out.println(entity);
-		}
-
+		CustomerEntity entity = repository.findOneCustomer(1);
+		System.out.println(entity.getAge());
 	}
 
 	private void updateCustomer(CustomerRepository repository) {
-		Optional<CustomerEntity> result = repository.findById((long) 1);
-		if (result.isPresent()) {
-			CustomerEntity entity = result.get();
-
-			// Update customer's information
-			entity.setAge(50);
-
-			repository.save(entity);
-		}
+		
+		repository.updateCustomer((long) 1, "TD", 25, "male");
 	}
 
 	private void deleteCustomer(CustomerRepository repository) {
-		Optional<CustomerEntity> result = repository.findById((long) 1);
-		if (result.isPresent()) {
-			CustomerEntity entity = result.get();
-
-			repository.delete(entity);
-		}
-	}
-}
+		repository.deleteCustomer(1);
+	}}
